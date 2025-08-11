@@ -1,2 +1,2 @@
-# Leetcode-daily
-算法每日一题练习
+# HackTheBox-daily
+靶场练习
