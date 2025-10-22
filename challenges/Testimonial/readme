@@ -1,0 +1,16 @@
+Skills
+GRPC交互
+GolangWeb堆栈
+
+Target
+[build]
+  bin = "./tmp/main"
+  cmd = "templ generate && go build -o ./tmp/main ."
+	
+	...
+  include_ext = ["tpl", "tmpl", "templ", "html"]
+  
+ 这表示修改任何 tpl、tmlp、templ 或 html 文件都将触发重建。这在开发过程中很常见，因为它允许快速测试对应用程序所做的更改。Air 不应以这种方式在生产环境中使用。
+服务端没设置过滤 
+
+可以自己写客户端传文件到服务器
